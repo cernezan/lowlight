@@ -3,7 +3,6 @@ import './style.css'
 
 initApp()
 
-
 async function saveObjectsToDB(objects: any) {
     let booksKeys = []
     for(let objectName in objects) {
@@ -11,7 +10,7 @@ async function saveObjectsToDB(objects: any) {
       craft.storageApi.put(objectName, JSON.stringify(objects[objectName]))
     }
     craft.storageApi.put('booksKeys', JSON.stringify(booksKeys))
-  }
+}
 
 export async function  fileProcessor(event: any) {
     const file = event.target.result

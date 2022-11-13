@@ -2,6 +2,7 @@ import * as React from "react"
 import * as ReactDOM from 'react-dom'
 import craftXIconSrc from "./craftx-icon.png"
 import { fileProcessor } from "./index"
+import Header from "./components/Header"
 
 const App: React.FC<{}> = () => {
   const isDarkMode = useCraftDarkMode();
@@ -18,7 +19,10 @@ const App: React.FC<{}> = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  }}>
+    }}>
+      
+    <Header />
+
     <img className="icon" src={craftXIconSrc} alt="CraftX logo" />
     <button className={`btn ${isDarkMode ? "dark" : ""}`} onClick={insertHelloWorld}>
       Hello world!
