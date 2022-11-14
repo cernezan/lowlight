@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom'
 import craftXIconSrc from "./craftx-icon.png"
 import { fileProcessor } from "./index"
 import Header from "./components/Header"
+import BooksList from "./components/BooksList"
 
 const App: React.FC<{}> = () => {
   const isDarkMode = useCraftDarkMode();
@@ -20,15 +21,16 @@ const App: React.FC<{}> = () => {
     flexDirection: "column",
     alignItems: "center",
     }}>
-      
-    <Header />
 
+    <Header />
+{/* 
     <img className="icon" src={craftXIconSrc} alt="CraftX logo" />
     <button className={`btn ${isDarkMode ? "dark" : ""}`} onClick={insertHelloWorld}>
       Hello world!
-    </button>
-    <label>Select a file:</label>
+    </button> */}
     <input onChange={uploadFile} type="file" id="myfile" name="myfile"/>
+
+    <BooksList />
 
   </div>;
 }
@@ -57,6 +59,31 @@ function uploadFile(event: any) {
   reader.readAsText(event.target.files[0])
 }
 
+async function getBooksFromDB() {
+  console.log("THEST")
+  const result = await craft.storageApi.get("booksKeys");
+
+  if (result.status !== "success") {
+    console.log("Key is not in the store");
+  }
+
+  console.log("Retrieved data:", result.data);
+  if(!result.data)
+    return
+
+  for (const bookId of JSON.parse(result.data)) {
+    console.log("bookId", bookId)
+    const book = await craft.storageApi.get(bookId);
+    console.log(book)
+    // convert data to JSON 
+    // write data to variable
+    
+  }
+
+  // send data to BooksList component - loop over it
+}
+
 export function initApp() {
   ReactDOM.render(<App />, document.getElementById('react-root'))
+  getBooksFromDB()
 }
