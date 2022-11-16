@@ -5,8 +5,18 @@ import { fileProcessor } from "./index"
 import Header from "./components/Header"
 import BooksList from "./components/BooksList"
 
+
 const App: React.FC<{}> = () => {
   const isDarkMode = useCraftDarkMode();
+
+  const [data, setData] = React.useState('')
+
+  React.useEffect(() => {
+    getBooksFromDB().then((data) => {
+      console.log(data, "MERIOOOOO")
+      setData(data[0].bookAuthor)
+    })
+  }, [])
 
   React.useEffect(() => {
     if (isDarkMode) {
@@ -23,14 +33,16 @@ const App: React.FC<{}> = () => {
     }}>
 
     <Header />
-{/* 
+    
+    {/* 
     <img className="icon" src={craftXIconSrc} alt="CraftX logo" />
     <button className={`btn ${isDarkMode ? "dark" : ""}`} onClick={insertHelloWorld}>
       Hello world!
     </button> */}
     <input onChange={uploadFile} type="file" id="myfile" name="myfile"/>
 
-    <BooksList />
+    <div>{data}</div>
+    {/* <BooksList booksData={getBooksFromDB()}/> */}
 
   </div>;
 }
@@ -61,6 +73,7 @@ function uploadFile(event: any) {
 
 async function getBooksFromDB() {
   console.log("THEST")
+  let bookList: any = []
   const result = await craft.storageApi.get("booksKeys");
 
   if (result.status !== "success") {
@@ -74,16 +87,15 @@ async function getBooksFromDB() {
   for (const bookId of JSON.parse(result.data)) {
     console.log("bookId", bookId)
     const book = await craft.storageApi.get(bookId);
-    console.log(book)
-    // convert data to JSON 
-    // write data to variable
-    
-  }
+    if(!book.data)
+      continue
 
-  // send data to BooksList component - loop over it
+    bookList.push(JSON.parse(book.data))
+  }
+  console.log("bookList", bookList)
+  return bookList
 }
 
 export function initApp() {
   ReactDOM.render(<App />, document.getElementById('react-root'))
-  getBooksFromDB()
 }
