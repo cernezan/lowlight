@@ -9,12 +9,11 @@ import BooksList from "./components/BooksList"
 const App: React.FC<{}> = () => {
   const isDarkMode = useCraftDarkMode();
 
-  const [data, setData] = React.useState('')
+  const [data, setData] = React.useState()
 
   React.useEffect(() => {
     getBooksFromDB().then((data) => {
-      console.log(data, "MERIOOOOO")
-      setData(data[0].bookAuthor)
+      setData(data)
     })
   }, [])
 
@@ -41,8 +40,7 @@ const App: React.FC<{}> = () => {
     </button> */}
     <input onChange={uploadFile} type="file" id="myfile" name="myfile"/>
 
-    <div>{data}</div>
-    {/* <BooksList booksData={getBooksFromDB()}/> */}
+    <BooksList booksData={data}/>
 
   </div>;
 }
