@@ -5,17 +5,26 @@ import { fileProcessor } from "./index"
 import Header from "./components/Header"
 import BooksList from "./components/BooksList"
 
-
 const App: React.FC<{}> = () => {
-  const isDarkMode = useCraftDarkMode();
+  const isDarkMode = useCraftDarkMode()
 
+  // handles book data
   const [data, setData] = React.useState()
+
+  // handles current page showing on display
+  const [pageState, setPageState] = React.useState('booksList')
+
+  const bookHighlightPage = true
 
   React.useEffect(() => {
     getBooksFromDB().then((data) => {
       setData(data)
     })
   }, [])
+
+  React.useEffect(() => {
+    console.log(pageState, "PAGE STATE NEW")
+  }, [pageState])
 
   React.useEffect(() => {
     if (isDarkMode) {
@@ -40,9 +49,35 @@ const App: React.FC<{}> = () => {
     </button> */}
     <input onChange={uploadFile} type="file" id="myfile" name="myfile"/>
 
-    <BooksList booksData={data}/>
+    {/* {displayContentPage(pageState, data)} */}
+
+    <BooksList booksData={data} passClickData={setPageState}/>
+
+    {/* <div>{if (bookHighlightPage) {
+       <BooksList booksData={data}/>
+    } else {
+      <div>Test</div>
+    }}</div> */}
 
   </div>;
+}
+
+
+function displayContentPage (pageState: string, ...data: any) {
+  console.log("TEST")
+  if (pageState === 'booksList') {
+    return <BooksList booksData={data}/>
+  } else {
+    return <div>Test</div>
+  }
+}
+
+function test (special: any) {
+  if (special) {
+    return <div>TEST2</div>
+  } else {
+    return <div>Test</div>
+  }
 }
 
 function useCraftDarkMode() {
