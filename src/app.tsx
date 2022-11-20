@@ -4,27 +4,25 @@ import craftXIconSrc from "./craftx-icon.png"
 import { fileProcessor } from "./index"
 import Header from "./components/Header"
 import BooksList from "./components/BooksList"
+import BookCard from "./components/BookCard"
+import BookDetails from "./components/BookDetails"
+import MainPage from "./components/MainPage"
 
 const App: React.FC<{}> = () => {
   const isDarkMode = useCraftDarkMode()
-
   // handles book data
   const [data, setData] = React.useState()
 
   // handles current page showing on display
-  const [pageState, setPageState] = React.useState('booksList')
+  let pageState = stateManager()
 
-  const bookHighlightPage = true
+  let displayedPage: any
 
   React.useEffect(() => {
     getBooksFromDB().then((data) => {
       setData(data)
     })
   }, [])
-
-  React.useEffect(() => {
-    console.log(pageState, "PAGE STATE NEW")
-  }, [pageState])
 
   React.useEffect(() => {
     if (isDarkMode) {
@@ -49,36 +47,27 @@ const App: React.FC<{}> = () => {
     </button> */}
     <input onChange={uploadFile} type="file" id="myfile" name="myfile"/>
 
-    {/* {displayContentPage(pageState, data)} */}
-
-    <BooksList booksData={data} passClickData={setPageState}/>
-
-    {/* <div>{if (bookHighlightPage) {
-       <BooksList booksData={data}/>
-    } else {
-      <div>Test</div>
-    }}</div> */}
+    <MainPage booksData={data}/>
+ 
 
   </div>;
 }
 
+function renderCurrentPage(pageState: string, bookData: any) {
+  if(pageState === 'booksList') {
+    return <BooksList booksData={bookData}/>
+  } 
+  return <BookDetails bookData={bookData} />
 
-function displayContentPage (pageState: string, ...data: any) {
-  console.log("TEST")
-  if (pageState === 'booksList') {
-    return <BooksList booksData={data}/>
-  } else {
-    return <div>Test</div>
-  }
 }
 
-function test (special: any) {
-  if (special) {
-    return <div>TEST2</div>
-  } else {
-    return <div>Test</div>
-  }
+export function stateManager(newState?: string) {
+  const [pageState, setPageState] = React.useState('booksList')
+  if(newState) setPageState(newState)
+
+  return pageState
 }
+
 
 function useCraftDarkMode() {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
