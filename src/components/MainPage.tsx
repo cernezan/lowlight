@@ -1,4 +1,5 @@
 import * as React from "react"
+import BookDetails from "./BookDetails"
 import BooksList from "./BooksList"
 
 export default function MainPage(props: any) {
@@ -8,11 +9,12 @@ export default function MainPage(props: any) {
     if(currentPage === 'booksList') {
         page = <BooksList booksData={props.booksData}/> 
     } else {
-        page = <div>TEST</div>
+        page = <BookDetails bookData={props.booksData[0]}/>
     }
 
-    function clickHandler(e: any) {
+    function clickHandler(e: any, test: string) {
         e.preventDefault();
+        console.log(test, "TES")
         setCurrentPage('NOT')
     }
     
@@ -20,7 +22,7 @@ export default function MainPage(props: any) {
     return (
         <>
             {page}
-            <button onClick={clickHandler}>TES</button>
+            <button onClick={event => clickHandler(event, "BESEDA")}>TES</button>
         </>
     )
 }
