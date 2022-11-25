@@ -7,15 +7,18 @@ export default function MainPage(props: any) {
     const [currentPage, setCurrentPage] = React.useState('booksList')
     let page: any
     if(currentPage === 'booksList') {
-        page = <BooksList booksData={props.booksData}/> 
+        page = <BooksList booksData={props.booksData} openBook={openBook}/> 
     } else {
         page = <BookDetails bookData={props.booksData[0]}/>
     }
 
     function clickHandler(e: any, test: string) {
         e.preventDefault();
-        console.log(test, "TES")
         setCurrentPage('NOT')
+    }
+
+    function openBook (book: any) {
+        console.log(book, "HERE")
     }
     
 
