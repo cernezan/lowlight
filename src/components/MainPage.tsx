@@ -5,11 +5,12 @@ import BooksList from "./BooksList"
 export default function MainPage(props: any) {
 
     const [currentPage, setCurrentPage] = React.useState('booksList')
+    const [selectedBook, setSelectedBook] = React.useState()
     let page: any
-    if(currentPage === 'booksList') {
-        page = <BooksList booksData={props.booksData} openBook={openBook}/> 
-    } else {
-        page = <BookDetails bookData={props.booksData[0]}/>
+    if (currentPage === 'booksList') {
+        page = <BooksList booksData={props.booksData} openBook={openBook} />
+    } else if (currentPage === 'bookDetailsPage') {
+        page = <BookDetails bookData={selectedBook} />
     }
 
     function clickHandler(e: any, test: string) {
@@ -17,10 +18,10 @@ export default function MainPage(props: any) {
         setCurrentPage('NOT')
     }
 
-    function openBook (book: any) {
-        console.log(book, "HERE")
+    function openBook(book: any, page: string) {
+        setSelectedBook(book)
+        setCurrentPage(page)
     }
-    
 
     return (
         <>

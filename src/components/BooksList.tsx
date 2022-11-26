@@ -3,17 +3,16 @@ import BookCard from "./BookCard"
 
 export default function BooksList(props: any) {
 
-    function openBook (book: any) {
-        console.log(book, "MA")
-        props.openBook(book)
+    function openBook(book: any, page: string) {
+        props.openBook(book, page)
     }
     return (
         <div>
             {props.booksData && props.booksData.map((book: any) => {
                 return (
                     <>
-                        <BookCard bookData={book}/>
-                        <button onClick={() => openBook(book)}>TEST</button>
+                        <BookCard bookData={book} />
+                        <button onClick={() => openBook(book, 'bookDetailsPage')}>TEST</button>
                     </>
                 )
             })}

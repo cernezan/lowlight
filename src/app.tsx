@@ -4,7 +4,6 @@ import craftXIconSrc from "./craftx-icon.png"
 import { fileProcessor } from "./index"
 import Header from "./components/Header"
 import BooksList from "./components/BooksList"
-import BookCard from "./components/BookCard"
 import BookDetails from "./components/BookDetails"
 import MainPage from "./components/MainPage"
 
@@ -12,11 +11,6 @@ const App: React.FC<{}> = () => {
   const isDarkMode = useCraftDarkMode()
   // handles book data
   const [data, setData] = React.useState()
-
-  // handles current page showing on display
-  let pageState = stateManager()
-
-  let displayedPage: any
 
   React.useEffect(() => {
     getBooksFromDB().then((data) => {
@@ -36,34 +30,34 @@ const App: React.FC<{}> = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    }}>
+  }}>
 
     <Header />
-    
+
     {/* 
     <img className="icon" src={craftXIconSrc} alt="CraftX logo" />
     <button className={`btn ${isDarkMode ? "dark" : ""}`} onClick={insertHelloWorld}>
       Hello world!
     </button> */}
-    <input onChange={uploadFile} type="file" id="myfile" name="myfile"/>
+    <input onChange={uploadFile} type="file" id="myfile" name="myfile" />
 
-    <MainPage booksData={data}/>
- 
+    <MainPage booksData={data} />
+
 
   </div>;
 }
 
 function renderCurrentPage(pageState: string, bookData: any) {
-  if(pageState === 'booksList') {
-    return <BooksList booksData={bookData}/>
-  } 
+  if (pageState === 'booksList') {
+    return <BooksList booksData={bookData} />
+  }
   return <BookDetails bookData={bookData} />
 
 }
 
 export function stateManager(newState?: string) {
   const [pageState, setPageState] = React.useState('booksList')
-  if(newState) setPageState(newState)
+  if (newState) setPageState(newState)
 
   return pageState
 }
@@ -103,13 +97,13 @@ async function getBooksFromDB() {
   }
 
   console.log("Retrieved data:", result.data);
-  if(!result.data)
+  if (!result.data)
     return
 
   for (const bookId of JSON.parse(result.data)) {
     console.log("bookId", bookId)
     const book = await craft.storageApi.get(bookId);
-    if(!book.data)
+    if (!book.data)
       continue
 
     bookList.push(JSON.parse(book.data))
