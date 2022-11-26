@@ -10,7 +10,7 @@ export default function MainPage(props: any) {
     if (currentPage === 'booksList') {
         page = <BooksList booksData={props.booksData} openBook={openBook} />
     } else if (currentPage === 'bookDetailsPage') {
-        page = <BookDetails bookData={selectedBook} />
+        page = <BookDetails bookData={selectedBook} changePageFunction={changePage} />
     }
 
     function clickHandler(e: any, test: string) {
@@ -20,6 +20,10 @@ export default function MainPage(props: any) {
 
     function openBook(book: any, page: string) {
         setSelectedBook(book)
+        setCurrentPage(page)
+    }
+
+    function changePage(page: string) {
         setCurrentPage(page)
     }
 

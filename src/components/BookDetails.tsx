@@ -1,8 +1,9 @@
 import * as React from "react"
 
-export default function BookDetails({ bookData }: any) {
+export default function BookDetails({ bookData, changePageFunction }: any) {
     return (
         <div style={{ border: '1px solid red' }}>
+            <button onClick={() => changePageFunction('booksList')}>Back</button>
             <div>Title: {bookData.bookTitle}</div>
             <div>Author: {bookData.bookAuthor}</div>
 
