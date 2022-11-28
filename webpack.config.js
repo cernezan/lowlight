@@ -31,7 +31,7 @@ module.exports = (env, argv) => {
         // Enables including CSS by doing "import './file.css'" in your TypeScript code
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader']
+          use: ['style-loader', 'css-loader', "postcss-loader"]
         },
         // Allows you to use import './file.png'" in your code to get a data URI
         {
