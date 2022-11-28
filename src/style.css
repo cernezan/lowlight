@@ -62,6 +62,23 @@ body.dark {
   background-color: #303030;
 }
 
+.icon-btn {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-top: 6px;
+  margin-left: 6px;
+}
+
+.icon-btn-image {
+  height: 32px;
+  color: #3C3C3C;
+}
+
 .heading-font {
   font-size: 15pt;
 }
