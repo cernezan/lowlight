@@ -1,11 +1,10 @@
 import * as React from "react"
 import * as ReactDOM from 'react-dom'
-import craftXIconSrc from "./craftx-icon.png"
-import { fileProcessor } from "./index"
 import Header from "./components/Header"
 import BooksList from "./components/BooksList"
 import BookDetails from "./components/BookDetails"
 import MainPage from "./components/MainPage"
+import EmptyPage from "./components/EmptyPage"
 
 const App: React.FC<{}> = () => {
   const isDarkMode = useCraftDarkMode()
@@ -26,11 +25,11 @@ const App: React.FC<{}> = () => {
     }
   }, [isDarkMode]);
 
-  return <div style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  }}>
+  let page: any = <EmptyPage />
+  if (data)
+    page = <MainPage booksData={data} />
+
+  return <div className="flex h-full flex-col">
 
     <Header />
 
@@ -39,10 +38,8 @@ const App: React.FC<{}> = () => {
     <button className={`btn ${isDarkMode ? "dark" : ""}`} onClick={insertHelloWorld}>
       Hello world!
     </button> */}
-    <input onChange={uploadFile} type="file" id="myfile" name="myfile" />
 
-    <MainPage booksData={data} />
-
+    {page}
 
   </div>;
 }
@@ -79,12 +76,6 @@ function insertHelloWorld() {
   });
 
   craft.dataApi.addBlocks([block]);
-}
-
-function uploadFile(event: any) {
-  const reader = new FileReader()
-  reader.onload = fileProcessor;
-  reader.readAsText(event.target.files[0])
 }
 
 async function getBooksFromDB() {

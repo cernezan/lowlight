@@ -1,6 +1,7 @@
 import * as React from "react"
 import BookDetails from "./BookDetails"
 import BooksList from "./BooksList"
+import EmptyPage from "./EmptyPage"
 
 export default function MainPage(props: any) {
 
@@ -30,7 +31,6 @@ export default function MainPage(props: any) {
     return (
         <>
             {page}
-            <button onClick={event => clickHandler(event, "BESEDA")}>TES</button>
         </>
     )
 }
