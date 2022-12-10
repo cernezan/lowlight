@@ -15,9 +15,10 @@ async function saveObjectsToDB(objects: any) {
 }
 
 export async function fileProcessor(event: any) {
-  const file = event.target.result
-  let highlights = file.split('==========')
+  let file = event.target.result
+  file = `==========\r\n` + file
 
+  let highlights = file.split('==========')
   let bookStore: any = {}
 
   for (let highlight of highlights) {
@@ -32,18 +33,22 @@ export async function fileProcessor(event: any) {
       if (line == '')
         return
       // AUTHOR AND BOOK TITLE LINE
-      if (line.includes('(')) {
+      if (line.includes('(') && line.includes('\r') && index == 1) {
         const split = line.split('(')
         bookTitle = split[0].trim()
-        bookAuthor = split[1].slice(0, -1)
+        bookAuthor = split[1].slice(0, -2)
+        if (bookAuthor.match("[0-9]+")) {
+          bookAuthor = split[2].slice(0, -2)
+        }
+
       }
       // META DATA LINE - PAGE, LOCATION, DATE ADDED
       if (line.includes('- Your Highlight')) {
         const split: string[] = line.split('|')
-        const dateNonformated: Date = new Date(split[2].slice(10))
+        const dateNonformated: Date = new Date(split[split.length - 1].slice(10))
         highlightDate = formatDateToSave(dateNonformated)
       }
-      if (index == 2) {
+      if (index == 4) {
         bookHighlight = line
       }
     })

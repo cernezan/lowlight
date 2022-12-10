@@ -11,8 +11,7 @@ export default function BooksList(props: any) {
             {props.booksData && props.booksData.map((book: any) => {
                 return (
                     <>
-                        <BookCard bookData={book} />
-                        <button onClick={() => openBook(book, 'bookDetailsPage')}>TEST</button>
+                        <BookCard bookData={book} openBook={props.openBook} />
                     </>
                 )
             })}

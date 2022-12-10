@@ -9,7 +9,7 @@ module.exports = {
       './src/**/*.tsx'
     ]
   },
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     fontSize: {
       'xs': '.6875rem',

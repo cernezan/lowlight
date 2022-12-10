@@ -17,13 +17,6 @@ const App: React.FC<{}> = () => {
     })
   }, [])
 
-  React.useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, [isDarkMode]);
 
   let page: any = <EmptyPage />
   if (data)
