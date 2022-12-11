@@ -16,11 +16,11 @@ export default function BookDetails({ bookData, changePageFunction }: any) {
         <div>
             <div className="m-2 flex">
                 <button className="mr-2" onClick={() => changePageFunction('booksList')}>
-                    <MdOutlineArrowBack className="hover:text-gray-800 dark:hover:text-gray-200" />
+                    <MdOutlineArrowBack className="hover:text-gray-400 dark:hover:text-gray-200" />
                 </button>
                 <div className="flex flex-col">
                     <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{bookData.bookTitle}</div>
-                    <div className="font-normal text-sm text-gray-700 dark:text-gray-400">{bookData.bookAuthor}</div>
+                    <div className="font-normal text-sm text-gray-600 dark:text-gray-400">{bookData.bookAuthor}</div>
                 </div>
 
             </div>
@@ -34,7 +34,7 @@ export default function BookDetails({ bookData, changePageFunction }: any) {
                             <div className="flex flex-row mb-2">
                                 <MdOutlineNoteAdd className="text-xl" />
 
-                                <div className="text-sm ml-auto text-gray-800 dark:text-gray-400">{highlight.highlightDate}</div>
+                                <div className="text-sm ml-auto text-gray-600 dark:text-gray-400">{highlight.highlightDate}</div>
                             </div>
 
                             <div className="font-base">{highlight.bookHighlight}</div>

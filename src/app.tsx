@@ -17,24 +17,26 @@ const App: React.FC<{}> = () => {
     })
   }, [])
 
+  function booksDataReady() {
+    getBooksFromDB().then((data) => {
+      setData(data)
+    })
+  }
 
   let page: any = <EmptyPage />
   if (data)
     page = <MainPage booksData={data} />
 
-  return <div className="flex h-full flex-col">
+  return <>
+    <div className="flex h-full flex-col">
 
-    <Header />
+      <Header dataReady={booksDataReady} />
 
-    {/* 
-    <img className="icon" src={craftXIconSrc} alt="CraftX logo" />
-    <button className={`btn ${isDarkMode ? "dark" : ""}`} onClick={insertHelloWorld}>
-      Hello world!
-    </button> */}
+      {page}
 
-    {page}
+    </div>;
+  </>
 
-  </div>;
 }
 
 function renderCurrentPage(pageState: string, bookData: any) {
@@ -52,7 +54,6 @@ export function stateManager(newState?: string) {
   return pageState
 }
 
-
 function useCraftDarkMode() {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 
@@ -63,16 +64,7 @@ function useCraftDarkMode() {
   return isDarkMode;
 }
 
-function insertHelloWorld() {
-  const block = craft.blockFactory.textBlock({
-    content: "Hello world!"
-  });
-
-  craft.dataApi.addBlocks([block]);
-}
-
 async function getBooksFromDB() {
-  console.log("THEST")
   let bookList: any = []
   const result = await craft.storageApi.get("booksKeys");
 
@@ -92,7 +84,6 @@ async function getBooksFromDB() {
 
     bookList.push(JSON.parse(book.data))
   }
-  console.log("bookList", bookList)
   return bookList
 }
 

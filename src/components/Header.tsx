@@ -4,7 +4,7 @@ import { fileProcessor } from "../index"
 
 
 
-export default function Header() {
+export default function Header({ dataReady }: any) {
     const hiddenFileInput = React.useRef() as any
     function triggerUploadMenu() {
         hiddenFileInput.current.click()
@@ -12,8 +12,9 @@ export default function Header() {
 
     function uploadFile(event: any) {
         const reader = new FileReader()
-        reader.onload = fileProcessor;
+        reader.onload = fileProcessor
         reader.readAsText(event.target.files[0])
+        reader.onloadend = dataReady
     }
 
     return (
@@ -23,7 +24,7 @@ export default function Header() {
                 <div className="w-full left-0 flex">
                     <input onChange={uploadFile} ref={hiddenFileInput} type="file" hidden></input>
                     <button onClick={triggerUploadMenu} className="h-5 w-5 my-auto mx-4">
-                        <MdOutlineFileUpload className=" w-full h-full hover:text-gray-300" />
+                        <MdOutlineFileUpload className=" w-full h-full hover:text-gray-400" />
                     </button>
                 </div>
                 {/* APP NAME  */}

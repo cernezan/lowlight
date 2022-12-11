@@ -73,6 +73,7 @@ export async function fileProcessor(event: any) {
     }
   }
   saveObjectsToDB(bookStore)
+  return bookStore
 }
 
 // file processor functions 
