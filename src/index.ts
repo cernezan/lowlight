@@ -49,7 +49,7 @@ export async function fileProcessor(event: any) {
         highlightDate = formatDateToSave(dateNonformated)
       }
       if (index == 4) {
-        bookHighlight = line
+        bookHighlight = line.trim()
       }
     })
 

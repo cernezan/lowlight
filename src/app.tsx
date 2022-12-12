@@ -34,7 +34,7 @@ const App: React.FC<{}> = () => {
 
       {page}
 
-    </div>;
+    </div>
   </>
 
 }
@@ -59,20 +59,20 @@ function useCraftDarkMode() {
 
   React.useEffect(() => {
     craft.env.setListener(env => setIsDarkMode(env.colorScheme === "dark"));
-  }, []);
+  }, [])
 
   return isDarkMode;
 }
 
 async function getBooksFromDB() {
   let bookList: any = []
-  const result = await craft.storageApi.get("booksKeys");
+  const result = await craft.storageApi.get("booksKeys")
 
   if (result.status !== "success") {
-    console.log("Key is not in the store");
+    console.log("Key is not in the store")
   }
 
-  console.log("Retrieved data:", result.data);
+  console.log("Retrieved data:", result.data)
   if (!result.data)
     return
 
