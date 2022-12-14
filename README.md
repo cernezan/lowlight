@@ -12,6 +12,7 @@ Lowlight tries to help you use your Kindle highlights inside your notes. My main
 
 ## Download
 [Download here](https://github.com/cernezan/lowlight/releases)
+
 You can learn more about instaling Craft extensions [here](https://www.craft.do/s/OhmDYXrBwI2wZS/b/B7626434-BB54-450E-8C2E-7D67D4C30431/Hacker_News).
 
 Download the latest version of the extension [here]().
