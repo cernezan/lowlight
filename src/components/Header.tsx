@@ -1,8 +1,6 @@
 import * as React from "react"
 import { MdOutlineFileUpload } from "react-icons/md"
-import { fileProcessor } from "../index"
-
-
+import { fileProcessor } from "../parser"
 
 export default function Header({ dataReady }: any) {
     const hiddenFileInput = React.useRef() as any
