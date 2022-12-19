@@ -1,6 +1,6 @@
 import { initApp } from './app'
-import './style.css'
 import { v4 } from 'uuid'
+import './style.css'
 
 initApp()
 

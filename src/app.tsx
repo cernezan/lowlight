@@ -7,7 +7,6 @@ import MainPage from "./components/MainPage"
 import EmptyPage from "./components/EmptyPage"
 
 const App: React.FC<{}> = () => {
-  const isDarkMode = useCraftDarkMode()
   // handles book data
   const [data, setData] = React.useState()
 
@@ -36,7 +35,6 @@ const App: React.FC<{}> = () => {
 
     </div>
   </>
-
 }
 
 function renderCurrentPage(pageState: string, bookData: any) {
@@ -44,7 +42,6 @@ function renderCurrentPage(pageState: string, bookData: any) {
     return <BooksList booksData={bookData} />
   }
   return <BookDetails bookData={bookData} />
-
 }
 
 export function stateManager(newState?: string) {
@@ -52,16 +49,6 @@ export function stateManager(newState?: string) {
   if (newState) setPageState(newState)
 
   return pageState
-}
-
-function useCraftDarkMode() {
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
-
-  React.useEffect(() => {
-    craft.env.setListener(env => setIsDarkMode(env.colorScheme === "dark"));
-  }, [])
-
-  return isDarkMode;
 }
 
 async function getBooksFromDB() {
