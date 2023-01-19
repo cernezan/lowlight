@@ -1,5 +1,5 @@
 import * as React from "react"
-import { MdOutlineNoteAdd, MdOutlineArrowBack } from "react-icons/md"
+import { MdOutlineNoteAdd, MdOutlineArrowBack, MdCopyAll } from "react-icons/md"
 
 export default function BookDetails({ bookData, changePageFunction }: any) {
 
@@ -15,6 +15,18 @@ export default function BookDetails({ bookData, changePageFunction }: any) {
         await craft.dataApi.addBlocks([highlightBlock])
     }
 
+    async function insertAllHighlights() {
+        let highlightBlocks: any[] = []
+        bookData.highlights.map((highlight: any) => {
+            highlightBlocks.push(craft.blockFactory.textBlock({
+                content: highlight.bookHighlight
+            }))
+        })
+
+        const result = await craft.dataApi.addBlocks(highlightBlocks)
+
+    }
+
     return (
         <div>
             <div className="m-2 flex">
@@ -25,6 +37,9 @@ export default function BookDetails({ bookData, changePageFunction }: any) {
                     <div className="font-bold tracking-tight text-gray-900 dark:text-white">{bookData.bookTitle}</div>
                     <div className="font-normal text-sm text-gray-600 dark:text-gray-400">{bookData.bookAuthor}</div>
                 </div>
+                <button className="ml-auto flex" onClick={() => insertAllHighlights()}>
+                    <MdCopyAll className="w-6 h-6 my-auto hover:text-gray-400 dark:hover:text-gray-200" />
+                </button>
             </div>
 
             {bookData && bookData.highlights.map((highlight: any) => {
