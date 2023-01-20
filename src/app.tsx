@@ -64,7 +64,6 @@ async function getBooksFromDB() {
     return
 
   for (const bookId of JSON.parse(result.data)) {
-    console.log("bookId", bookId)
     const book = await craft.storageApi.get(bookId);
     if (!book.data)
       continue

@@ -24,9 +24,8 @@ export default function BookDetails({ bookData, changePageFunction }: any) {
         })
 
         const result = await craft.dataApi.addBlocks(highlightBlocks)
-
     }
-
+    console.log(bookData.bookAuthor, "BBBB")
     return (
         <div>
             <div className="m-2 flex">
@@ -35,7 +34,11 @@ export default function BookDetails({ bookData, changePageFunction }: any) {
                 </button>
                 <div className="flex flex-col">
                     <div className="font-bold tracking-tight text-gray-900 dark:text-white">{bookData.bookTitle}</div>
-                    <div className="font-normal text-sm text-gray-600 dark:text-gray-400">{bookData.bookAuthor}</div>
+                    <div className="font-normal text-sm text-gray-600 dark:text-gray-400">
+                        {bookData.bookAuthor.map((author: string[]) => (
+                            <span className="mr-2">{author}</span>
+                        ))}
+                    </div>
                 </div>
                 <button className="ml-auto flex" onClick={() => insertAllHighlights()}>
                     <MdCopyAll className="w-6 h-6 my-auto hover:text-gray-400 dark:hover:text-gray-200" />

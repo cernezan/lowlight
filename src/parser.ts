@@ -11,7 +11,7 @@ export async function fileProcessor(event: any) {
     for (let highlight of highlights) {
         const hightlightParts = splitHighlights(highlight)
         let bookTitle: string = ""
-        let bookAuthor: string = ""
+        let bookAuthor: string[] = []
         let highlightDate: string = ""
         let bookHighlight: string = ""
 
@@ -23,10 +23,17 @@ export async function fileProcessor(event: any) {
             if (line.includes('(') && line.includes('\r') && index == 1) {
                 const split = line.split('(')
                 bookTitle = split[0].trim()
-                bookAuthor = split[1].slice(0, -2)
-                if (bookAuthor.match("[0-9]+")) {
-                    bookAuthor = split[2].slice(0, -2)
+                let currAuthor = split[1].slice(0, -2)
+                if (currAuthor.match("[0-9]+")) {
+                    currAuthor = split[2].slice(0, -2)
                 }
+                currAuthor = currAuthor.replace(',', '')
+                if(currAuthor.includes(';')){
+                    bookAuthor = currAuthor.split(';')
+                }else {
+                    bookAuthor.push(currAuthor as string)
+                }
+                
 
             }
             // META DATA LINE - PAGE, LOCATION, DATE ADDED
