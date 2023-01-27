@@ -37,19 +37,19 @@ const App: React.FC<{}> = () => {
   </>
 }
 
-function renderCurrentPage(pageState: string, bookData: any) {
-  if (pageState === 'booksList') {
-    return <BooksList booksData={bookData} />
-  }
-  return <BookDetails bookData={bookData} />
-}
+// function renderCurrentPage(pageState: string, bookData: any) {
+//   if (pageState === 'booksList') {
+//     return <BooksList booksData={bookData} />
+//   }
+//   return <BookDetails bookData={bookData} />
+// }
 
-export function stateManager(newState?: string) {
-  const [pageState, setPageState] = React.useState('booksList')
-  if (newState) setPageState(newState)
+// export function stateManager(newState?: string) {
+//   const [pageState, setPageState] = React.useState('booksList')
+//   if (newState) setPageState(newState)
 
-  return pageState
-}
+//   return pageState
+// }
 
 async function getBooksFromDB() {
   let bookList: any = []

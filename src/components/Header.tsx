@@ -19,7 +19,7 @@ export default function Header({ dataReady }: any) {
         <div className="sticky top-0 inset-x-0 flex w-full border-b bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-gray-200 dark:border-gray-700" style={{ maxHeight: '44px', minHeight: '44px', height: '44px' }}>
             <div className="flex w-full" style={{ minHeight: '44px' }}>
                 {/* UPLAOD ICON */}
-                <div className="w-full left-0 flex">
+                <div className="w-full flex">
                     <input onChange={uploadFile} ref={hiddenFileInput} type="file" hidden></input>
                     <button onClick={triggerUploadMenu} className="h-5 w-5 my-auto mx-4">
                         <MdOutlineFileUpload className=" w-full h-full hover:text-gray-400" />

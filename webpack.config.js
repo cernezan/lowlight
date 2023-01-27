@@ -58,7 +58,7 @@ module.exports = (env, argv) => {
       isProd && new CopyPlugin({
         patterns: [
           { from: 'manifest.json' },
-          { from: 'icon.png' }
+          { from: 'assets/icon.png' }
         ],
       }),
       isProd && new ZipPlugin({
