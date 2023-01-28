@@ -4,9 +4,6 @@ import BottomBar from "./BottomBar"
 
 export default function BooksList(props: any) {
 
-    function openBook(book: any, page: string) {
-        props.openBook(book, page)
-    }
     return (
         <>
             <div>
@@ -19,7 +16,7 @@ export default function BooksList(props: any) {
                 })}
             </div>
 
-            <BottomBar></BottomBar>
+            <BottomBar sortByBookTitle={props.sortByBookTitle} />
         </>
     )
 }
