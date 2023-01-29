@@ -58,7 +58,7 @@ module.exports = (env, argv) => {
       isProd && new CopyPlugin({
         patterns: [
           { from: 'manifest.json' },
-          { from: 'assets/icon.png' }
+          { from: 'icon.png' }
         ],
       }),
       isProd && new ZipPlugin({
@@ -68,7 +68,7 @@ module.exports = (env, argv) => {
           'app.js.LICENSE.txt',
           'index.html',
           'manifest.json',
-          'assets/icon.png'
+          'icon.png'
         ]
       })
     ].filter(Boolean)
