@@ -1,4 +1,4 @@
-# Lowlight - Craft Extention for your Kindle highlights
+# Lowlight - Craft Extension for your Kindle highlights
 
 Lowlight tries to help you use your Kindle highlights inside your notes. My main goal was to solve my issue of trying to write book summaries with a combination of highlights from the book. 
 
